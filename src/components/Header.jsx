@@ -1,13 +1,16 @@
 import Link from 'next/link';
-import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
+import { RegisterLink, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 
-export default function Header() {
+export default async function Header() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+  
   return (
-    <header className="flex  justify-between items-center p-4 bg-gray-800 text-white shadow-md">
+    <header className="flex justify-between items-center p-4 bg-gray-800 text-white shadow-md">
       {/* Navigation Links */}
       <nav className="flex space-x-6">
-      <RegisterLink>Sign up</RegisterLink>
-        <Link href="/api/auth/login" className="text-lg font-medium hover:text-blue-400 transition-colors">
+        <Link href="/" className="text-lg font-medium hover:text-blue-400 transition-colors">
           Home
         </Link>
         <Link href="/profile" className="text-lg font-medium hover:text-blue-400 transition-colors">
@@ -15,18 +18,33 @@ export default function Header() {
         </Link>
       </nav>
 
-      {/* Static Authentication Buttons */}
+      {/* Authentication Links */}
       <div>
-        <button
-          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-sm transition-transform transform hover:scale-105 mr-2"
-        >
-          Login
-        </button>
-        <button
-          className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg shadow-sm transition-transform transform hover:scale-105"
-        >
-          Logout
-        </button>
+
+        
+        {user ? (
+          <>
+            <span className="mr-4 text-sm">Welcome, {user.given_name || 'User'}!</span>
+            <LogoutLink>
+              <a className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg shadow-sm transition-transform transform hover:scale-105">
+                Logout
+              </a>
+            </LogoutLink>
+          </>
+        ) : (
+          <>
+            <LoginLink>
+              <a className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow-sm transition-transform transform hover:scale-105 mr-2">
+                Login
+              </a>
+            </LoginLink>
+            <RegisterLink>
+              <a className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-sm transition-transform transform hover:scale-105">
+                Sign Up
+              </a>
+            </RegisterLink>
+          </>
+        )}
       </div>
     </header>
   );
