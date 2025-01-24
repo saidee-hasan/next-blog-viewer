@@ -1,11 +1,13 @@
 import Link from 'next/link';
+import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
 
 export default function Header() {
   return (
     <header className="flex  justify-between items-center p-4 bg-gray-800 text-white shadow-md">
       {/* Navigation Links */}
       <nav className="flex space-x-6">
-        <Link href="/" className="text-lg font-medium hover:text-blue-400 transition-colors">
+      <RegisterLink>Sign up</RegisterLink>
+        <Link href="/api/auth/login" className="text-lg font-medium hover:text-blue-400 transition-colors">
           Home
         </Link>
         <Link href="/profile" className="text-lg font-medium hover:text-blue-400 transition-colors">
