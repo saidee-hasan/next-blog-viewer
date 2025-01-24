@@ -40,7 +40,7 @@ export default async function Header() {
             </LoginLink>
             <RegisterLink>
               <a className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-sm transition-transform transform hover:scale-105">
-                Sign Up
+                Sign U
               </a>
             </RegisterLink>
           </>
