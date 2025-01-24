@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className="flex fixed  w-full justify-between items-center p-4 bg-gray-800 text-white shadow-md">
+    <header className="flex  justify-between items-center p-4 bg-gray-800 text-white shadow-md">
       {/* Navigation Links */}
       <nav className="flex space-x-6">
         <Link href="/" className="text-lg font-medium hover:text-blue-400 transition-colors">
