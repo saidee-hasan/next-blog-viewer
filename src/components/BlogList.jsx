@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { fetchAllPosts } from '../utils/api';
@@ -24,18 +24,18 @@ const BlogList = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Show loading state
+    return <div className="text-center p-4">Loading...</div>; // Show loading state
   }
 
   if (error) {
-    return <div>{error}</div>; // Show error message if an error occurs
+    return <div className="text-center text-red-600 p-4">{error}</div>; // Show error message if an error occurs
   }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
       {blogs.map((blog) => (
-        <div key={blog.id} className="border p-4 rounded shadow">
-          <h3 className="text-lg font-bold">{blog.title}</h3>
+        <div key={blog.id} className="border p-4 rounded shadow hover:shadow-lg transition-shadow duration-300">
+          <h3 className="text-lg font-bold mb-2">{blog.title}</h3>
           <Link href={`/blog/${blog.id}`}>
             <span className="text-blue-600 hover:underline cursor-pointer">Read More</span>
           </Link>
